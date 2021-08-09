@@ -1,2 +1,1 @@
-# hanziyin-app
-PWA for hanziyin in svelte
+# 汉字引App in Svelte
