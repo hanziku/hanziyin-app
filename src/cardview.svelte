@@ -1,5 +1,6 @@
 <script>
     import {factorsOf,breedCount,cjkBlockName} from "hanziyin"
+    import {kangxiHtml} from "./kangxizidian"
     import BreedView from "./breedview.svelte";
     import {addHZ, removeHZ,notifyUser} from "./store.js"
     export let tf,idx, from;
@@ -8,7 +9,7 @@
         removeHZ(tf)
     }
     let hasbreed=breedCount(tf[0])>0
-
+    
     const showfactor=factor=>{
         addHZ(factor,tf.join(),idx);
     }
@@ -22,9 +23,14 @@
         document.execCommand('copy')
         sel.removeAllRanges();
     }
-    const copyToClipboard=(evt)=>{
+    const copyToClipboard=evt=>{
         copySelection(evt) 
         notifyUser("已复制“" + evt.target.innerText+"”");
+    }
+    const openkangxi=evt=>{
+        const hz=parseInt(evt.target.dataset.hz).toString(16).toUpperCase();
+        const url='../'+evt.target.dataset.kangxi+'#u'+hz;
+        window.open(url);
     }
 </script>
 
@@ -44,7 +50,13 @@
         {String.fromCodePoint(w)}</span>
         <span>{'U+'+w.toString(16).toUpperCase()}</span>
         <span class="uniblock">{cjkBlockName(w).replace('bmp','').replace('ext-','扩').toUpperCase()}</span>
+    
+        {#if kangxiHtml(w)}
+            <span class="kxlink" on:click={openkangxi} 
+            data-hz={w} data-kangxi={kangxiHtml(w)}>康熙字典</span>
+        {/if}
     {/each}
+
     
     <BreedView tf={tf} idx={idx+1}/>
 </div>
@@ -59,6 +71,7 @@
     padding-right:3px;cursor:copy}
     .hasbreed { border-radius: 5px; border:solid 1px blue}
     .factor {border:1px dotted blue;cursor:pointer}
-
+    .kxlink {color:brown;cursor:pointer}
+    .kxlink:hover {border-bottom:1px solid brown} 
     .uniblock{color:blue}
 </style>

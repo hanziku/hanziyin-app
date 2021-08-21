@@ -1,13 +1,16 @@
 <script>
     import {cjkBlockName,breedCount} from "hanziyin"
+
     export let onclick;
     export let hz;
     let hzinfo='U+'+hz.codePointAt(0).toString(16).toUpperCase()+
     ' '+cjkBlockName(hz).toUpperCase();
 </script>
 
-<span  class={(breedCount(hz)?" withbreed":"")+
-" hz cjk-"+cjkBlockName(hz)} on:click={onclick} title={hzinfo}>{hz}</span>
+<span class={(breedCount(hz)?" withbreed":"")+
+" hz cjk-"+cjkBlockName(hz) }
+
+on:click={onclick} title={hzinfo}>{hz}</span>
 <!-- 
 <span href="." class="tooltip" on:click={onclick}></span>
     {hz}
@@ -24,6 +27,7 @@
     .cjk-ext-d {color:hsl(210, 85%, 35%)}
     .cjk-ext-e {color:hsl(280, 85%, 35%)}
     .cjk-ext-f {color:hsl(380, 85%, 35%)}
+    .kangxizidian {border-radius: 5px; border:1px dotted brown}
 /*tooltip causing extension char to crush
 .tooltip {
   cursor:pointer;
