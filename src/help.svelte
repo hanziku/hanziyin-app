@@ -7,12 +7,13 @@ const setTofind=evt=>{
 </script>
 <div>
     <hr/>
-构件过滤条件：笔划数首次笔形。
+构件过滤条件：笔划数以及第一及第二笔形（可不选）。
     <br/>可输入多于一个构件。
     <br/><span class="box" on:click={setTofind}>木口</span>表示“木”先出现，
     <br/>若要“口”先出现，则<span class="box"  on:click={setTofind}>口木</span>
     <br/><span class="box"  on:click={setTofind}>又又</span>再点“双”得“叒”及“叕”。
-    <br/>粗体字是构件，点大字复制到剪贴板。
+    <br/>粗体字是构件，点选显示所有孳乳。
+    <br/>点大字复制到剪贴板。
 </div>
 
 <style>
